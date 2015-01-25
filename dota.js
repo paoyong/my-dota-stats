@@ -15,17 +15,19 @@ var hours_since_game;
 var json;
 
 var port = 8888;
-var ip = '104.131.118.167'
-var ip = 'localhost'
+var ip = '104.131.118.167';
+var ip = 'localhost';
 
 /* Start the server */
 var server = http.createServer(function (req, res) {
     console.log("Recieved request: " + req.url);
     
     /* On a request, read the HTML file */
-    fs.readFile("index.html", function(error, data) {
+    call_jsdom("index.html", function(window) {
+        var $ = window.$;
+        $("#hours_ago").text(hours_since_game + '');
         res.writeHead(202, {'Content-Type': 'text/html'});
-        res.end(data);
+        res.end("<!DOCTYPE html>\n" + $('html').html());
     });
 }).listen(port, ip);
 
@@ -42,14 +44,33 @@ function updateMatchId() {
                     callback(null, match_json);
                 });
             },
-            function(match_json) {
+            function(match_json, callback) {
                 hours_since_game = matchDetails.getHoursSinceGameWasPlayed(match_json);
                 hours_since_game = parseFloat(hours_since_game).toFixed(1);
+                callback(null, hours_since_game);
+            }, 
+            function(hours_since_game) {
             }
         ]);
     });
     setTimeout(updateMatchId, interval_ms);
 }
 
+function call_jsdom(source, callback) {
+    jsdom.env(
+            source,
+            ['jquery-2.1.3.js'],
+            function(errors, window) {
+                process.nextTick(
+                function() {
+                    if (errors) {
+                        throw new Error("There were errors: " + errors);
+                    }
+                    callback(window);
+                }
+            );
+        }
+    );
+}
 /* Jump start updateMatchId */
 updateMatchId();
