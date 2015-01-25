@@ -7,7 +7,7 @@ var jsdom = require('jsdom');
 var getMyLatestMatch = require('./getMyLatestMatchId');
 var matchDetails = require('./getMatchDetailsFromId');
 
-var refresh_minutes = 30;
+var refresh_minutes = 5;
 var interval_ms = refresh_minutes * 60 * 1000;
 
 var id;
