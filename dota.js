@@ -16,7 +16,6 @@ var json;
 
 var port = 8888;
 var ip = '104.131.118.167';
-var ip = 'localhost';
 
 /* Start the server */
 var server = http.createServer(function (req, res) {
