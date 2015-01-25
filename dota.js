@@ -1,6 +1,7 @@
 var http = require('http');
 var async = require('async');
-var fs = requrie('fs');
+var fs = require('fs');
+var jsdom = require('jsdom');
 
 /* Dota modules */
 var getMyLatestMatch = require('./getMyLatestMatchId');
@@ -19,11 +20,17 @@ var ip = 'localhost'
 
 /* Start the server */
 var server = http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Keith\'s latest Dota matchid is ' + id + '. He played the game ' + hours_since_game + ' hours ago.');
+    console.log("Recieved request: " + req.url);
+    
+    /* On a request, read the HTML file */
+    fs.readFile("index.html", function(error, data) {
+        res.writeHead(202, {'Content-Type': 'text/html'});
+        res.end(data);
+    });
 }).listen(port, ip);
 
-/* Updates match ID and hours since that match, every [refresh_minutes] */
+/* Updates match ID and hours since that match, every [refresh_minutes] 
+ * Also updates index.html */
 function updateMatchId() {
     getMyLatestMatch(function(match_id) {
         id = match_id;
