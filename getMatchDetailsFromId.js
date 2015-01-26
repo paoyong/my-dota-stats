@@ -20,9 +20,9 @@ module.exports = {
             console.log("Got error: ", e);
         });
     },
-    getHoursSinceGameWasPlayed: function(json) {
+    getHoursSinceGameWasPlayed: function(match_start_time) {
         var hours;
-        hours = (new Date().getTime() / 1000) - json.result.start_time;
+        hours = (new Date().getTime() / 1000) - match_start_time;
         hours = (hours / 60 / 60);
         return hours;
     }

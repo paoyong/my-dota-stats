@@ -7,11 +7,6 @@ var getMyLatestMatch = require('./getMyLatestMatchId');
 var matchDetails = require('./getMatchDetailsFromId');
 var dotadb = require('./dotadb');
 
-
-var id;
-var hours_since_game;
-var json;
-
 var port = 8888;
 var ip = '104.131.118.167';
 //var ip = 'localhost';
@@ -25,7 +20,8 @@ var server = http.createServer(function (req, res) {
             dotadb.getLatestDotaMatch(function(match) {
                 console.log("Found the latest match: " + match.match_id);
                 res.writeHead(202, {'Content-Type': 'text/html'});
-                $("#hours_ago").text(match.match_id + '');
+                var hours = matchDetails.getHoursSinceGameWasPlayed(match.match_time).toFixed(1);
+                $("#hours_ago").text(hours);
                 res.end("<!DOCTYPE html>\n" + $('html').html());
             });
         });
