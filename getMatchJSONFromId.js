@@ -20,9 +20,10 @@ module.exports = {
             console.log("Got error: ", e);
         });
     },
-    getHoursSinceGameWasPlayed: function(match_start_time) {
+    /* A helper function to return hours since game played as a long float */
+    getHoursSinceGameWasPlayed: function(match_start_time, match_duration) {
         var hours;
-        hours = (new Date().getTime() / 1000) - match_start_time;
+        hours = (new Date().getTime() / 1000) - match_start_time + match_duration;
         hours = (hours / 60 / 60);
         return hours;
     }

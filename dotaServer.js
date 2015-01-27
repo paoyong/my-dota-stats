@@ -3,12 +3,15 @@ var fs = require('fs');
 var jsdom = require('jsdom');
 
 /* Dota modules */
-var getMyLatestMatch = require('./getMyLatestMatchId');
-var matchDetails = require('./getMatchDetailsFromId');
+var matchDetails = require('./getMatchJSONFromId');
 var dotadb = require('./dotadb');
 
 var port = 8888;
+
+/* Digital Ocean server port */
 var ip = '104.131.118.167';
+
+/* Comment this line when deploying to Git and the server */
 //var ip = 'localhost';
 
 /* Start the server */
@@ -18,13 +21,19 @@ var server = http.createServer(function (req, res) {
         call_jsdom("index.html", function(window) {
             var $ = window.$;
             dotadb.getLatestDotaMatch(function(match) {
+                console.log("Found latest match! Match: " + match);
+                var hours = matchDetails.getHoursSinceGameWasPlayed(match.match_time, match.match_duration).toFixed(1);
                 console.log("Found the latest match: " + match.match_id);
+                
+                /* Write to the HTML file with JQuery */
                 res.writeHead(202, {'Content-Type': 'text/html'});
-                var hours = matchDetails.getHoursSinceGameWasPlayed(match.match_time).toFixed(1);
                 $("#hours_ago").text(hours);
                 res.end("<!DOCTYPE html>\n" + $('html').html());
             });
         });
+    } else {
+        /* End the request if it's something other than '/' */
+        res.end();
     }
 }).listen(port, ip);
 
