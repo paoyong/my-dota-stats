@@ -2,7 +2,7 @@
 
 var https = require('https');
 var apiURL;
-var latestMatchId = undefined;
+var latestMatchId;
 
 module.exports = {
     getMatchDetailsFromId: function(match_id, callback) {
@@ -27,4 +27,4 @@ module.exports = {
         hours = (hours / 60 / 60);
         return hours;
     }
-}
+};

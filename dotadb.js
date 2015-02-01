@@ -45,7 +45,8 @@ module.exports = {
                 'match_id': -1
             }
         }, function(err, match) {
+            if (err) console.log("Got an error while calling getLatestDotaMatch: " + err);
             callback(match);
         });
     }
-}
+};

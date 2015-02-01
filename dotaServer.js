@@ -12,7 +12,7 @@ var port = 8888;
 var ip = '104.131.118.167';
 
 /* Comment this line when deploying to Git and the server */
-//var ip = 'localhost';
+var ip = 'localhost';
 
 /* Start the server */
 var server = http.createServer(function (req, res) {
