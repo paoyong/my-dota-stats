@@ -1,3 +1,3 @@
 $.get('/hours-played', function(response) {
-    $('p').text(response);
+    $('#hours-ago').text(response);
 });

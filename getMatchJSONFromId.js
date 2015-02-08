@@ -23,7 +23,6 @@ module.exports = {
     /* A helper function to return hours since game played as a long float */
     getHoursSinceGameWasPlayed: function(match_start_time, match_duration) {
         var hours;
-        console.log("Match duration was" + match_duration);
         hours = (new Date().getTime() / 1000) - match_start_time - match_duration;
         hours = (hours / 60 / 60);
         return hours;
