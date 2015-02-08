@@ -4,7 +4,7 @@
 
 var https = require('https');
 var myFirstLatestMatchURL = "https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?matches_requested=1&account_id=94636820&key=29270A858787255DA9648F82763CBB35";
-var latestMatchId = undefined;
+var latestMatchId;
 
 module.exports = function(callback) {
     https.get(myFirstLatestMatchURL, function(res) {
