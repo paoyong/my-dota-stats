@@ -20,7 +20,6 @@ function updateMatchId() {
 
         console.log("Grabbing any new matches from the Dota API.");
         async.waterfall([
-
             function(callback) {
                 matchDetails.getMatchDetailsFromId(id, function(match_json) {
                     json = match_json;

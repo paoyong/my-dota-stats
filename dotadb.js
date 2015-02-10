@@ -48,5 +48,12 @@ module.exports = {
             if (err) console.log("Got an error while calling getLatestDotaMatch: " + err);
             callback(match);
         });
+    },
+    /* Grabs the num_matches latest dota matches from the database, sorted by match id */
+    getDotaMatches: function(num_matches, callback) {
+        DotaMatch.find({}, {}, function(err, match) {
+            if (err) console.log("Got an error while calling getDotaMatches: " + err);
+            callback(match);
+        });
     }
 };
