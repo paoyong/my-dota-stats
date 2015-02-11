@@ -1,12 +1,13 @@
 /* Functions for parsing JSON of a single Dota 2 match, given match_id */
 
 var https = require('https'),
+    config = require('config'),
     apiURL,
     latestMatchId;
 
 module.exports = {
     getMatchDetailsFromId: function(match_id, callback) {
-        apiURL = "https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=" + match_id + "&key=29270A858787255DA9648F82763CBB35";
+        apiURL = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=' + match_id + '&key=' + config.steam_api_key;
         https.get(apiURL, function(res) {
             var body = '';
             res.on('data', function(chunk) {

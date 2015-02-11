@@ -11,7 +11,6 @@ var dotadb = require('./dotadb');
 var refresh_minutes = 5;
 var interval_ms = refresh_minutes * 60 * 1000;
 
-
 /* Updates match ID and hours since that match, every [refresh_minutes] 
  * Also updates index.html */
 function updateMatchId() {
