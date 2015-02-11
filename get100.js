@@ -1,3 +1,6 @@
+// TODO
+// 1. Actually callback the JSON instead of printing it out
+// 2. Implement the JSON to return.
 var request = require('request');
 var dateBucket = require('./dateBucket.js');
 var config = require('./config.js');
@@ -38,6 +41,7 @@ var parse_json = function(json) {
     // WARNING: This will only call whenever I play more than 100 matches in the last 12 days! Behavior is potentially buggy! The i == 99 part means that the Dota API call still has more matches to go. I'm just not sure how to test it out.
     if (get_more === true && i == 99) {
         req_from_api(matches[i] - 1);
+    } else {
     }
 };
 
