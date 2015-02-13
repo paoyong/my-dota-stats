@@ -1,7 +1,7 @@
 /* Functions for parsing JSON of a single Dota 2 match, given match_id */
 
 var https = require('https'),
-    config = require('config'),
+    config = require('./config.js'),
     apiURL,
     latestMatchId;
 
