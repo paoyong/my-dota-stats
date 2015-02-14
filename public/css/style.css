@@ -1,6 +1,13 @@
 h2 {
     font-family: 'Roboto', sans-serif;
 }
-rect:hover {
-    fill: #555;
+#dota-histogram {
+    text-align: center;
 }
+#dota-histogram-canvas {
+    background-color: #ddd;
+    padding: 6px;
+}
+rect:hover {
+
+}   
