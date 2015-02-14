@@ -27,6 +27,7 @@ function parseJSON(json, days_ago, callback) {
     }
     callback(date_bucket_JSON);
 }
+
 function makeRequestToMatchHistory(url, days_ago, callback) {
     request({
         url: url,
