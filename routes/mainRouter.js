@@ -1,16 +1,17 @@
 var express = require('express'),
-    router = express.Router(),
-    /* Custom modules */
+    fs = require('fs'),
+    config = require('../config.js'),
     matchDetails = require('../getMatchJSONFromId'),
     dotadb = require('../dotadb'),
-    getDotaMatchCounts = require('../getDotaMatchCounts');
+    getDotaMatchCounts = require('../getDotaMatchCounts'),
+    router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'My Dota Stats :D'});
+router.get('/', function(req, res) {
+    res.render('index', { title: 'Keith\'s Dota Stats'});
 });
 
 // Respondes '/hours-played' with the number of hours played.
-router.get('/hours-played', function(req, res, next) {
+router.get('/hours-played', function(req, res) {
     dotadb.getLatestDotaMatch(function(match) {
         // Get the hours and format it nicely.
         var hours = matchDetails.getHoursSinceGameWasPlayed(match.match_time, match.match_duration).toFixed(1);
@@ -20,9 +21,9 @@ router.get('/hours-played', function(req, res, next) {
     });
 });
 
-router.get('/dota-match-counts', function(req, res, next){
-    getDotaMatchCounts(12, function(match_count_JSON) {
-        res.json(match_count_JSON);
+router.get('/dota-match-counts', function(req, res){
+    fs.readFile(config.dota_match_counts_json_filename, 'utf8', function (err, data) {
+        res.json(JSON.parse(data));
     });
 });
 
