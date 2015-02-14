@@ -1,10 +1,14 @@
 function drawData(dotaJSON) {
-    var width = 500,
-        height = 100,
+    var width = 0,
+        height = 0,
         cellSize = 20,
         cellMarginRight = 3,
         maxOpacityTippingPoint = 6,    // For example, if this value is 10, 10 would be represented with the strongest color in the chart.
-        minOpacity = 0.0;
+        minOpacity = 0.0,
+        dotaJSONKeyArray = Object.keys(dotaJSON);
+
+    width = ((cellSize + cellMarginRight) * dotaJSONKeyArray.length) - cellMarginRight;
+    height = cellSize;
 
     var dotaHistogram = d3.select('#dota-histogram');
 
@@ -20,7 +24,7 @@ function drawData(dotaJSON) {
         .attr('height', height);
 
     // For each data point, draw a square
-    svg.selectAll('rect').data(Object.keys(dotaJSON)).enter()
+    svg.selectAll('rect').data(dotaJSONKeyArray).enter()
         .append('rect')
         .attr('width', cellSize)
         .attr('height', cellSize)
