@@ -34,11 +34,10 @@ hr {
 }
 #dota-histogram-canvas {
     padding: 6px;
-    border: 1px solid #ddd;
     border-radius: 2px;
 }
 rect:hover {
     border: 1px solid;
-    stroke: #333;
+    stroke: #555;
     stroke-width: 2;
 }   

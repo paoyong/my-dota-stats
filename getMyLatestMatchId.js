@@ -16,6 +16,7 @@ module.exports = function(callback) {
         res.on('end', function() {
             var responseJSON = JSON.parse(body);
             latestMatchId = responseJSON.result.matches[0].match_id;
+            console.log(latestMatchId);
             callback(latestMatchId);
         });
     }).on('error', function(e) {

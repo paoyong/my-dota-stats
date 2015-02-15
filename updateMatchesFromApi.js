@@ -16,7 +16,7 @@ var async = require('async'),
 
 /* Updates match ID and hours since that match, every [refresh_minutes] 
  * Also updates index.html */
-function grab() {
+function update() {
     // Grab the latest match ID and add to database.
     getMyLatestMatch(function(match_id) {
         id = match_id;
@@ -51,19 +51,8 @@ function grab() {
             }
         });
     });
-}
-
-function getLastUpdated() {
-    console.log('all jobs done!');
-}
-
-function update() {
-
-    async.series([
-        grab(),
-        getLastUpdated()
-    ]);
     setTimeout(update, interval_ms);
 }
+
 /* Jump start update */
 update();

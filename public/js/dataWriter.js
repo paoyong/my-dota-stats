@@ -2,26 +2,22 @@ function drawData(dotaJSON) {
     var width = 0,
         height = 0,
         cellSize = 25,
-        cellMarginRight = 3,
-        maxOpacityTippingPoint = 6,    // For example, if this value is 10, 10 would be represented with the strongest color in the chart.
-        minOpacity = 0.0,
+        // Margin only applies to right and bottom!
+        cellMargin = 3,
+        maxCellsPerRow = 8,
         dotaJSONKeyArray = Object.keys(dotaJSON),
-        colors = ['#EFEFEF',
-                  '#D5D59D',
-                  '#FF9F65',
-                  '#FF7347',
-                  '#FF422D'];
+        dataCount = dotaJSONKeyArray.length,
+        colors = ['#DFDEDE',
+                  '#C7E595',
+                  '#79BD8F',
+                  '#00A388',
+                  '#FF6138'];
 
-    width = ((cellSize + cellMarginRight) * dotaJSONKeyArray.length) - cellMarginRight;
-    height = cellSize;
+    // Calculate SVG canvas dimensions
+    width = ((cellSize + cellMargin) * maxCellsPerRow) - cellMargin;
+    height = (cellSize + cellMargin) * Math.ceil(dataCount / maxCellsPerRow);
 
     var dotaHistogram = d3.select('#dota-histogram');
-
-    var opacityScale = d3.scale.linear()
-        .domain([0, maxOpacityTippingPoint])
-        .range([minOpacity, 1]);
-
-    console.log(opacityScale(5));
 
     // Draw SVG canvas on #dota-histogram
     var svg = dotaHistogram.append('svg')
@@ -35,7 +31,10 @@ function drawData(dotaJSON) {
         .attr('width', cellSize)
         .attr('height', cellSize)
         .attr('x', function(d) {
-            return d * (cellSize + cellMarginRight);
+            return (d % maxCellsPerRow) * (cellSize + cellMargin);
+        })
+        .attr('y', function(d) {
+            return (cellSize + cellMargin) * Math.floor(d / maxCellsPerRow);
         })
         .attr('fill', function(d){ 
             var matches_played = dotaJSON[d],
