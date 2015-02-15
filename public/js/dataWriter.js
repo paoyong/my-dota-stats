@@ -5,7 +5,12 @@ function drawData(dotaJSON) {
         cellMarginRight = 3,
         maxOpacityTippingPoint = 6,    // For example, if this value is 10, 10 would be represented with the strongest color in the chart.
         minOpacity = 0.0,
-        dotaJSONKeyArray = Object.keys(dotaJSON);
+        dotaJSONKeyArray = Object.keys(dotaJSON),
+        colors = ['#EFEFEF',
+                  '#D5D59D',
+                  '#FF9F65',
+                  '#FF7347',
+                  '#FF422D'];
 
     width = ((cellSize + cellMarginRight) * dotaJSONKeyArray.length) - cellMarginRight;
     height = cellSize;
@@ -32,9 +37,23 @@ function drawData(dotaJSON) {
         .attr('x', function(d) {
             return d * (cellSize + cellMarginRight);
         })
-        .attr('fill', 'rgb(256, 30, 20)')
-        .attr('fill-opacity', function(d) {
-            return opacityScale(dotaJSON[d]);
+        .attr('fill', function(d){ 
+            var matches_played = dotaJSON[d],
+                color = '';
+
+            if (matches_played > 6) {
+                color = colors[4];
+            } else if (matches_played > 3) {
+                color = colors[3];
+            } else if (matches_played > 2) {
+                color = colors[2];
+            } else if (matches_played > 0) {
+                color = colors[1];
+            } else {
+                color = colors[0];
+            }
+
+            return color;
         })
         .attr('days-ago', function(d) {
             return d;
@@ -84,8 +103,7 @@ function drawTooltips() {
     });
 }
 
-// Grab data
-$.get('/hours-played', function(response) {
+$.get('/hours-ago', function(response) {
     $('#hours-ago').text(response);
 });
 

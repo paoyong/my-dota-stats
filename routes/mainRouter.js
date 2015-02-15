@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 });
 
 // Respondes '/hours-played' with the number of hours played.
-router.get('/hours-played', function(req, res) {
+router.get('/hours-ago', function(req, res) {
     dotadb.getLatestDotaMatch(function(match) {
         // Get the hours and format it nicely.
         var hours = matchDetails.getHoursSinceGameWasPlayed(match.match_time, match.match_duration).toFixed(1);
