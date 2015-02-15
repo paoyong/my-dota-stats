@@ -1,10 +1,14 @@
 function drawData(dotaJSON) {
     var width = 0,
         height = 0,
-        cellSize = 25,
+        cellSize = 28,
         // Margin only applies to right and bottom!
-        cellMargin = 3,
-        maxCellsPerRow = 8,
+        cellMargin = 4,
+        // Where to start drawing cells, relative
+        // to the SVG canvas.
+        cellStartX = cellMargin,
+        cellStartY = cellMargin,
+        maxCellsPerRow = 10,
         dotaJSONKeyArray = Object.keys(dotaJSON),
         dataCount = dotaJSONKeyArray.length,
         colors = ['#DFDEDE',
@@ -14,8 +18,8 @@ function drawData(dotaJSON) {
                   '#FF6138'];
 
     // Calculate SVG canvas dimensions
-    width = ((cellSize + cellMargin) * maxCellsPerRow) - cellMargin;
-    height = (cellSize + cellMargin) * Math.ceil(dataCount / maxCellsPerRow);
+    width = ((cellSize + cellMargin) * maxCellsPerRow) + cellMargin;
+    height = (cellSize + cellMargin) * Math.ceil(dataCount / maxCellsPerRow) + cellMargin;
 
     var dotaHistogram = d3.select('#dota-histogram');
 
@@ -31,10 +35,10 @@ function drawData(dotaJSON) {
         .attr('width', cellSize)
         .attr('height', cellSize)
         .attr('x', function(d) {
-            return (d % maxCellsPerRow) * (cellSize + cellMargin);
+            return (d % maxCellsPerRow) * (cellSize + cellMargin) + cellStartX;
         })
         .attr('y', function(d) {
-            return (cellSize + cellMargin) * Math.floor(d / maxCellsPerRow);
+            return (cellSize + cellMargin) * Math.floor(d / maxCellsPerRow) + cellStartY;
         })
         .attr('fill', function(d){ 
             var matches_played = dotaJSON[d],

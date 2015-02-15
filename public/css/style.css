@@ -13,7 +13,7 @@ h3 {
     font-size: 1.25rem;
 }
 .container {
-    width: 475px;
+    width: 355px;
     margin: auto;
     margin-top: 20vh;
     text-align: center;
@@ -24,11 +24,9 @@ hr {
     margin-top: 30px;
 }
 #hours-ago {
-    font-size: 2rem;
     background-color: #DFDFDF;
-    margin: auto;
     border-radius: 4px;
-    padding: 5px 15px 5px 15px;
+    padding: 0px 3px 0px 3px;
     width: 100px;
 
 }

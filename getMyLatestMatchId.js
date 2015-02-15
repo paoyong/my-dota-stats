@@ -4,11 +4,12 @@
 
 var https = require('https'),
     config = require('./config.js'),
-    myFirstLatestMatchURL = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?matches_requested=1&account_id=' + config.account_id +'&key=' + config.steam_api_key,
+    myFirstLatestMatchURL = 'https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?matches_requested=1&key=' + config.steam_api_key + '&account_id=' + config.dota_account_id,
     latestMatchId = 0;
 
 module.exports = function(callback) {
     https.get(myFirstLatestMatchURL, function(res) {
+        console.log(myFirstLatestMatchURL);
         var body = '';
         res.on('data', function(chunk) {
             body += chunk;
