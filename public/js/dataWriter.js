@@ -46,7 +46,7 @@ function drawData(dotaJSON) {
 
             if (matches_played > 6) {
                 color = colors[4];
-            } else if (matches_played > 3) {
+            } else if (matches_played > 4) {
                 color = colors[3];
             } else if (matches_played > 2) {
                 color = colors[2];
