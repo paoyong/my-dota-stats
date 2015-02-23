@@ -31,7 +31,6 @@ hr {
     border-radius: 4px;
     padding: 0px 3px 0px 3px;
     width: 100px;
-
 }
 #dota-histogram-canvas {
     padding: 6px;
@@ -41,4 +40,15 @@ rect:hover {
     border: 1px solid;
     stroke: #555;
     stroke-width: 2;
-}   
+}
+/* Smartphone CSS */
+@media only screen and (max-width: 375px) {
+    .container {
+        margin-top: 0px;
+        width: 100%;
+    }
+    body {
+        margin: 30px;
+        padding: 0;
+    }
+}

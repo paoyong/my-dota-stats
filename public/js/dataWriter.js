@@ -1,22 +1,32 @@
-function drawData(dotaJSON) {
-    var width = 0,
-        height = 0,
-        cellSize = 28,
-        // Margin only applies to right and bottom!
-        cellMargin = 4,
-        // Where to start drawing cells, relative
-        // to the SVG canvas.
-        cellStartX = cellMargin,
-        cellStartY = cellMargin,
-        maxCellsPerRow = 10,
-        dotaJSONKeyArray = Object.keys(dotaJSON),
-        dataCount = dotaJSONKeyArray.length,
-        colors = ['#DFDEDE',
-                  '#C7E595',
-                  '#79BD8F',
-                  '#00A388',
-                  '#FF6138'];
+// Media Queries
+var smartphoneQuery = window.matchMedia("(min-device-width: 320px) and (max-device-width: 480px)");
 
+// D3 variables */
+var width = 0,
+    height = 0,
+    cellSize = 28,
+    // Margin only applies to right and bottom!
+    cellMargin = 4,
+    // Where to start drawing cells, relative
+    // to the SVG canvas.
+    cellStartX = cellMargin,
+    cellStartY = cellMargin,
+    maxCellsPerRow = 10,
+    colors = ['#DFDEDE',
+              '#C7E595',
+              '#79BD8F',
+              '#00A388',
+              '#FF6138'];
+
+if (smartphoneQuery.matches) {
+    maxCellsPerRow = 5;
+    cellSize = 45;
+    $('#matches-description').text('Matches I\'ve played in the past month (tap on a box to see details):');
+}
+function drawData(dotaJSON) {
+
+var dotaJSONKeyArray = Object.keys(dotaJSON),
+    dataCount = dotaJSONKeyArray.length,
     // Calculate SVG canvas dimensions
     width = ((cellSize + cellMargin) * maxCellsPerRow) + cellMargin;
     height = (cellSize + cellMargin) * Math.ceil(dataCount / maxCellsPerRow) + cellMargin;
@@ -74,8 +84,14 @@ function drawTooltips() {
 
         if (matchesPlayed === 0){
             tooltipText = 'No matches played ';
+        } 
+        else if (matchesPlayed === 1) {
+            tooltipText = 'One match played ';
         } else {
             tooltipText = matchesPlayed + ' matches played ';
+        }
+        if (smartphoneQuery.matches){
+            tooltipText += '<br>';
         }
 
         if (daysAgo === 0) {
