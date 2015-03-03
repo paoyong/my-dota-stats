@@ -11,10 +11,10 @@
     "mongoose": "*",
     "request": "*"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "engines": {
+      "node": "0.12.x",
+      "npm": "*"
+  }
   "author": "",
   "license": "ISC"
 }
