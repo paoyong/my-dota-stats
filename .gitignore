@@ -27,4 +27,4 @@ build/Release
 node_modules
 
 # Config file
-config.js
+# config.js
