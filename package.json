@@ -1,5 +1,5 @@
 {
-  "name": "DotaPage",
+  "name": "dota",
   "version": "0.1.0",
   "description": "Displays my latest match played, with some details and stuff",
   "main": "dota.js",
