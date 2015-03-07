@@ -1,9 +1,8 @@
 var fs = require('fs'),
     express = require('express'),
     path = require('path'),
-    port = 8888,
     mainRouter = require("./routes/mainRouter")
-    PORT = process.env.PORT || 8080;
+    PORT = process.env.PORT || 8081;
 
 var app = express();
 app.disable('etag');
